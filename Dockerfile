@@ -16,8 +16,5 @@ RUN mkdir -p /app/data
 ENV PYTHONUNBUFFERED=1
 ENV DATABASE_PATH=/app/data/kleinanzeigen.db
 
-# Volume for persistent data
-VOLUME ["/app/data"]
-
 # Run the bot
 CMD ["python", "-m", "src.main"]
