@@ -1,0 +1,23 @@
+version: '3.8'
+
+services:
+  kleinanzeigen-bot:
+    build: .
+    container_name: kleinanzeigen-monitor
+    restart: unless-stopped
+    environment:
+      # Only BOT_TOKEN needed - multi-user mode!
+      - TG_BOT_TOKEN=${TG_BOT_TOKEN}
+      # Default settings (users can customize via /interval)
+      - INTERVAL_MINUTES=${INTERVAL_MINUTES:-30}
+      - MAX_NEW_PER_CYCLE=${MAX_NEW_PER_CYCLE:-30}
+      - MAX_LISTINGS_PER_QUERY=${MAX_LISTINGS_PER_QUERY:-50}
+      - DATABASE_PATH=/app/data/kleinanzeigen.db
+    volumes:
+      - ./data:/app/data
+      - ./logs:/app/logs
+    logging:
+      driver: "json-file"
+      options:
+        max-size: "10m"
+        max-file: "3"

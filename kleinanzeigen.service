@@ -1,0 +1,28 @@
+[Unit]
+Description=Kleinanzeigen Telegram Monitor Bot
+After=network.target
+
+[Service]
+Type=simple
+User=www-data
+Group=www-data
+WorkingDirectory=/opt/kleinanzeigen-bot
+ExecStart=/opt/kleinanzeigen-bot/venv/bin/python -m src.main
+Restart=always
+RestartSec=10
+
+# Environment file with secrets
+EnvironmentFile=/opt/kleinanzeigen-bot/.env
+
+# Logging
+StandardOutput=append:/var/log/kleinanzeigen-bot/bot.log
+StandardError=append:/var/log/kleinanzeigen-bot/error.log
+
+# Security
+NoNewPrivileges=true
+ProtectSystem=strict
+ReadWritePaths=/opt/kleinanzeigen-bot/data
+ReadWritePaths=/var/log/kleinanzeigen-bot
+
+[Install]
+WantedBy=multi-user.target
