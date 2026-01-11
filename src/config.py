@@ -25,7 +25,7 @@ class Config:
     # Monitoring URL (fixed search feed)
     SEARCH_URL: str = os.getenv(
         "SEARCH_URL",
-        "https://www.kleinanzeigen.de/s-autos/chemnitz/c216l3869r150"
+        "https://www.kleinanzeigen.de/s-autos/chemnitz/anbieter:privat/c216l3869r150"
     )
     
     # HTTP settings
